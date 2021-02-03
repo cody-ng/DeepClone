@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace DeepClone
@@ -34,7 +35,28 @@ namespace DeepClone
                 return CloneString(input);
             }
 
-            return input;
+            var newObj = Activator.CreateInstance(inputType);
+            
+
+            var fieldInfos = inputType.GetFields(BindingFlags.Public | BindingFlags.Instance);
+            foreach(var f in fieldInfos)
+            {
+                var ft = f.FieldType;
+                var fvalue = f.GetValue(input);
+
+                Console.WriteLine($"Name = {f.Name}, Value = {fvalue}, FieldType = {ft}, ValueType = {ft.IsValueType}");
+                if (ft.IsValueType)
+                {
+                    f.SetValue(newObj, fvalue);
+                }
+                else
+                {
+                    var refTypeObj = CloneReferenceType(fvalue, ft);
+                    f.SetValue(newObj, refTypeObj);
+                }
+            }
+
+            return newObj;
         }
 
         static String CloneString(object obj)
