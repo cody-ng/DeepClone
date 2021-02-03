@@ -1,0 +1,13 @@
+D:\github\csharp\DeepClone\bin\Debug\netcoreapp3.1\DeepClone.exe
+D:\github\csharp\DeepClone\bin\Debug\netcoreapp3.1\DeepClone.deps.json
+D:\github\csharp\DeepClone\bin\Debug\netcoreapp3.1\DeepClone.runtimeconfig.json
+D:\github\csharp\DeepClone\bin\Debug\netcoreapp3.1\DeepClone.runtimeconfig.dev.json
+D:\github\csharp\DeepClone\bin\Debug\netcoreapp3.1\DeepClone.dll
+D:\github\csharp\DeepClone\bin\Debug\netcoreapp3.1\DeepClone.pdb
+D:\github\csharp\DeepClone\obj\Debug\netcoreapp3.1\DeepClone.csprojAssemblyReference.cache
+D:\github\csharp\DeepClone\obj\Debug\netcoreapp3.1\DeepClone.AssemblyInfoInputs.cache
+D:\github\csharp\DeepClone\obj\Debug\netcoreapp3.1\DeepClone.AssemblyInfo.cs
+D:\github\csharp\DeepClone\obj\Debug\netcoreapp3.1\DeepClone.csproj.CoreCompileInputs.cache
+D:\github\csharp\DeepClone\obj\Debug\netcoreapp3.1\DeepClone.dll
+D:\github\csharp\DeepClone\obj\Debug\netcoreapp3.1\DeepClone.pdb
+D:\github\csharp\DeepClone\obj\Debug\netcoreapp3.1\DeepClone.genruntimeconfig.cache
