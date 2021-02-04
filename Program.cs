@@ -1,5 +1,6 @@
 ﻿using DeepClone.Model.ReferenceType;
 using DeepClone.Model.ValueType;
+using DeepClone.TestCases;
 using System;
 
 namespace DeepClone
@@ -8,16 +9,28 @@ namespace DeepClone
     {
         static void Main(string[] args)
         {
-            //int input = 1;
-            //string input = "abc";
-            //var input = new Book();
-            var input = new BaseTestClass() { Id=1, Name="test", Count=10};
+            // value type tests
+            CloneTest(ValueTypeTest.CreateInteger());
 
+            CloneTest(ValueTypeTest.CreateBook());
+
+
+            // reference type tests
+            CloneTest(ReferenceTypeTest.CreateString());
+
+            CloneTest(ReferenceTypeTest.CreateBaseTestClass());
+            
+            CloneTest(ReferenceTypeTest.CreateDerivedTestClass());
+
+        }
+
+        static void CloneTest(object input)
+        {
             var result = DeepClone.Clone(input);
             Console.WriteLine($"result = {result}");
 
             Console.WriteLine($"is clone referenceEqual() to input? = {object.ReferenceEquals(input, result)}");
-            
+            Console.WriteLine();
         }
     }
 }

@@ -9,5 +9,6 @@ namespace DeepClone.Model.ValueType
         public long Id;
         public int NumPages;
         public bool IsColor;
+
     }
 }

@@ -7,6 +7,18 @@ namespace DeepClone
 {
     static class DeepClone
     {
+        /// <summary>
+        /// Clones an object for the following fields:
+        /// - public fields only
+        ///  
+        /// Does not include the following:
+        /// - static fields
+        /// - collection fields (array, list, ...etc)
+        /// - properties
+        /// - private or protected fields
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         static public Object Clone(object input)
         {
             if (input == null)
@@ -18,7 +30,7 @@ namespace DeepClone
             // if value type, return 
             if (inputType.IsValueType)
             {
-                return CloneValueType(input);
+                return CloneValueType(input, inputType);
             }
 
 
@@ -44,7 +56,7 @@ namespace DeepClone
                 var ft = f.FieldType;
                 var fvalue = f.GetValue(input);
 
-                Console.WriteLine($"Name = {f.Name}, Value = {fvalue}, FieldType = {ft}, ValueType = {ft.IsValueType}");
+                //Console.WriteLine($"Name = {f.Name}, Value = {fvalue}, FieldType = {ft}, ValueType = {ft.IsValueType}");
                 if (ft.IsValueType)
                 {
                     f.SetValue(newObj, fvalue);
@@ -64,11 +76,11 @@ namespace DeepClone
             return new string((string)obj);
         }
 
-        static Object CloneValueType(object obj)
+        static Object CloneValueType(object input, Type inputType)
         {
             Console.WriteLine("Cloning value type...");
-            //var temp = Convert.ChangeType(input, inputType);
-            return obj;
+            return Convert.ChangeType(input, inputType);
+            //return input;
         }
         #endregion
 
