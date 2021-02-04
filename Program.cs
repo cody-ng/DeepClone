@@ -23,10 +23,15 @@ namespace DeepClone
             CloneTest(ReferenceTypeTest.CreateDerivedTestClass());
 
 
-            CloneListTest(LinkedListTest.CreateItems(1));
+            CloneListTest(Helper.CreateItems(1));
 
-            CloneListTest(LinkedListTest.CreateItems(10));
-            
+            CloneListTest(Helper.CreateItems(10));
+
+            //LinkedListItemTest.Equal_Value_Tests();
+
+            LinkedListHandlerTest.IsUniqueTest();
+            LinkedListHandlerTest.EqualTest();
+
         }
 
         static void CloneTest(object input)
@@ -46,10 +51,37 @@ namespace DeepClone
 
             Console.WriteLine($"is clone referenceEqual() to input? = {object.ReferenceEquals(input, result)}");
 
-            var isUnique = LinkedListTest.IsUnique(input, result);
-            Console.WriteLine($"isUnique = {isUnique}");
-            Console.WriteLine();
+            //var isUnique = LinkedListHandlerTest.IsUnique(input, result);
+            //Console.WriteLine($"isUnique = {isUnique}");
+            //Console.WriteLine();
         }
 
+#if false
+        static void IsUniqueListTest()
+        {
+            var l1 = Helper.CreateItems(1);
+            var l2 = Helper.CreateItems(3);
+            var l3 = Helper.CreateItems(1000);
+            var l4 = Helper.CreateItems(50);
+
+            Console.WriteLine($"l1 and l1 are unique? = {LinkedListHandlerTest.IsUnique(l1, l1)}");
+            Console.WriteLine($"l2 and l2 are unique? = {LinkedListHandlerTest.IsUnique(l2, l2)}");
+            Console.WriteLine($"l3 and l3 are unique? = {LinkedListHandlerTest.IsUnique(l3, l3)}");
+            Console.WriteLine($"l4 and l4 are unique? = {LinkedListHandlerTest.IsUnique(l4, l4)}");
+
+            Console.WriteLine($"l1 and l2 are unique? = {LinkedListHandlerTest.IsUnique(l1, l2)}");
+            Console.WriteLine($"l1 and l3 are unique? = {LinkedListHandlerTest.IsUnique(l1, l3)}");
+            Console.WriteLine($"l1 and l4 are unique? = {LinkedListHandlerTest.IsUnique(l1, l4)}");
+
+            Console.WriteLine($"l2 and l1 are unique? = {LinkedListHandlerTest.IsUnique(l2, l1)}");
+            Console.WriteLine($"l2 and l3 are unique? = {LinkedListHandlerTest.IsUnique(l2, l3)}");
+            Console.WriteLine($"l2 and l4 are unique? = {LinkedListHandlerTest.IsUnique(l2, l4)}");
+
+            Console.WriteLine($"l3 and l1 are unique? = {LinkedListHandlerTest.IsUnique(l3, l1)}");
+            Console.WriteLine($"l3 and l2 are unique? = {LinkedListHandlerTest.IsUnique(l3, l2)}");
+            Console.WriteLine($"l3 and l4 are unique? = {LinkedListHandlerTest.IsUnique(l3, l4)}");
+
+        }
+#endif
     }
 }

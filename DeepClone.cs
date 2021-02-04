@@ -5,8 +5,12 @@ using System.Text;
 
 namespace DeepClone
 {
-    static class DeepClone
+    class DeepClone
     {
+        #region class fields
+        protected Dictionary<object, object> CachedObjects { get; set; } = new Dictionary<object, object>();
+        #endregion
+
         /// <summary>
         /// Clones an object for the following fields:
         /// - public fields only
@@ -33,25 +37,47 @@ namespace DeepClone
                 return CloneValueType(input, inputType);
             }
 
+            var deepcloner = new DeepClone();
 
-            return CloneReferenceType(input, inputType);
+            return deepcloner.CloneReferenceType(input, inputType);
         }
 
         #region helpers
-        static Object CloneReferenceType(object input, Type inputType)
+
+        static Object CloneValueType(object input, Type inputType)
+        {
+            Console.WriteLine("Cloning value type...");
+            return Convert.ChangeType(input, inputType);
+            //return input;
+        }
+
+        Object CloneReferenceType(object input, Type inputType)
         {
             //Console.WriteLine($"Cloning reference type {inputType.Name}...");
 
             if (input == null)
                 return null;
 
+            // special case for string (primitive)
             if (inputType == typeof(string))
             {
                 return CloneString(input);
             }
 
+            // detect cyclic loop by checking if the input has previously been traversed
+            object cachedObj = null;
+            if( this.CachedObjects.TryGetValue(input, out cachedObj) )
+            {
+                // loop found, no need to clone input
+                return cachedObj;
+            }
+
+            // create a new object of the same reference type as the input
             var newObj = Activator.CreateInstance(inputType);
-            
+
+            // cache the new object
+            this.CachedObjects.Add(input, newObj);
+
 
             var fieldInfos = inputType.GetFields(BindingFlags.Public | BindingFlags.Instance);
             foreach(var f in fieldInfos)
@@ -74,17 +100,11 @@ namespace DeepClone
             return newObj;
         }
 
-        static String CloneString(object obj)
+        String CloneString(object obj)
         {
             return new string((string)obj);
         }
 
-        static Object CloneValueType(object input, Type inputType)
-        {
-            Console.WriteLine("Cloning value type...");
-            return Convert.ChangeType(input, inputType);
-            //return input;
-        }
         #endregion
 
 
