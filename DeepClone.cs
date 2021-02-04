@@ -25,7 +25,7 @@ namespace DeepClone
                 return null;
 
             var inputType = input.GetType();
-            Console.WriteLine($"input={input}, Type={inputType}");
+            Console.WriteLine($"DeepClone.Clone() = input={input}, Type={inputType}");
 
             // if value type, return 
             if (inputType.IsValueType)
@@ -40,7 +40,10 @@ namespace DeepClone
         #region helpers
         static Object CloneReferenceType(object input, Type inputType)
         {
-            Console.WriteLine($"Cloning reference type {inputType.Name}...");
+            //Console.WriteLine($"Cloning reference type {inputType.Name}...");
+
+            if (input == null)
+                return null;
 
             if (inputType == typeof(string))
             {

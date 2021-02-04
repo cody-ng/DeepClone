@@ -32,4 +32,37 @@ namespace DeepClone.Model.ReferenceType
             return s;
         }
     }
+
+
+    public class LinkedListItem
+    {
+        public long Id;
+        public string Name;
+
+        public LinkedListItem Next;
+
+        bool IsLast()
+        {
+            return this.Next == null;
+        }
+
+        public int Length()
+        {
+            int length = 0;
+            var temp = this;
+            while( temp != null)
+            {
+                ++length;
+                temp = temp.Next;
+            }
+            return length;
+        }
+
+        public override string ToString()
+        {
+            return $"Id={Id}, Name={Name}, Length={Length()}, Is Last={IsLast()}";
+        }
+
+    }
+
 }
