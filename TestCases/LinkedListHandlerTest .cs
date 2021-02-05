@@ -1,5 +1,6 @@
 ﻿using DeepClone.Model.ReferenceType;
 using DeepClone.Model.ValueType;
+using DeepClone.ReferenceType;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -58,7 +59,9 @@ namespace DeepClone.TestCases
 
 #endif
 
-        public static void IsUniqueTest()
+        #region CreateItemHandlers sanity test
+
+        public static void IsUnique_Test()
         {
             var l1 = Helper.CreateItemHandlers(1);
             var l2 = Helper.CreateItemHandlers(3);
@@ -87,7 +90,7 @@ namespace DeepClone.TestCases
             Console.WriteLine();
         }
 
-        public static void EqualTest()
+        public static void Equal_Test()
         {
             var l1 = Helper.CreateItemHandlers(1);
             var l2 = Helper.CreateItemHandlers(3);
@@ -105,9 +108,117 @@ namespace DeepClone.TestCases
             Console.WriteLine($"l1 and l1 are equal? = {l1.AreEqual(l1)}");
             Console.WriteLine($"l2 and l2 are equal? = {l2.AreEqual(l2)}");
             Console.WriteLine($"l4 and l5 are equal? = {l4.AreEqual(l5)}");
+            Console.WriteLine();
 
         }
 
+        static public void Length_Test()
+        {
+            var l1 = Helper.CreateItemHandlers(1);
+            var l2 = Helper.CreateItemHandlers(3);
+            var l3 = Helper.CreateItemHandlers(1000);
+            var l4 = Helper.CreateItemHandlers(500);
+
+            Console.WriteLine("Length test");
+            Console.WriteLine($"l1 correct? = {l1.Length == 1}");
+            Console.WriteLine($"l2 correct? = {l2.Length == 3}");
+            Console.WriteLine($"l3 correct? = {l3.Length == 1000}");
+            Console.WriteLine($"l4 correct? = {l4.Length == 500}");
+            Console.WriteLine();
+
+        }
+
+        static public void GetLastItem_Test()
+        {
+            var l1 = Helper.CreateItemHandlers(1);
+            var l2 = Helper.CreateItemHandlers(1000);
+
+            var last = l1.GetLastItem();
+            Console.WriteLine("Last item test...");
+            Console.WriteLine($"l1's correct? {last != null && last.Next == null}");
+            last = l2.GetLastItem();
+            Console.WriteLine($"l2's correct? {last != null && last.Next == null}");
+            Console.WriteLine();
+        }
+
+        static public void GetNthItem_Test()
+        {
+            var l1 = Helper.CreateItemHandlers(1);
+
+            var item = l1.GetNthItem(1);
+            Console.WriteLine("nTh item test...");
+            Console.WriteLine($"l1 - correct? {item != null && item.Id == 1}");
+
+            try
+            {
+                item = l1.GetNthItem(2);
+                Console.WriteLine($"l1 - out of bound correct? false");
+            }
+            catch (Exception )
+            {
+                // should get here
+                Console.WriteLine($"l1 - out of bound correct? true");
+            }
+
+            var l2 = Helper.CreateItemHandlers(1000);
+            item = l2.GetNthItem(1000);
+            Console.WriteLine($"l2's correct? {item != null && item.Id == 1000}");
+            try
+            {
+                item = l2.GetNthItem(1001);
+                Console.WriteLine($"l2 - out of bound correct? false");
+            }
+            catch (Exception )
+            {
+                // should get here
+                Console.WriteLine($"l2 - out of bound correct? true");
+            }
+
+
+            Console.WriteLine();
+        }
+
+        #endregion
+
+        #region loop back tests
+        public static void Clone_LoopBack_List_Tests()
+        {
+            // 1) single item loops back to itself
+            Clone_LoopBack_List_Test(1, 1);
+
+            // 2) last item loops back to the 5th item
+            Clone_LoopBack_List_Test(5, 2);
+
+            // 3) last item loops back to the 1th item
+            Clone_LoopBack_List_Test(500, 1);
+
+            // 4) last item loops back to the last item
+            Clone_LoopBack_List_Test(500, 500);
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="length"></param>
+        /// <param name="nItem">first item = 1</param>
+        static void Clone_LoopBack_List_Test(int length, int nItem)
+        {
+            var item = Helper.CreateLoopBackItems(length, nItem); 
+
+            var clonedItem = (LinkedListItem)DeepClone.Clone(item);
+
+            var originalHandler = new LinkedListHandler(item);
+            var clonedHandler = new LinkedListHandler(clonedItem);
+
+            var isUnique = originalHandler.IsUnique(clonedHandler);
+            var areEqual = originalHandler.AreEqual(clonedHandler);
+
+            var s = $"Cloning Loopback list - (length={length}, loopback Item={nItem})...is unique? = {isUnique}, are equal? = {areEqual}";
+            Console.WriteLine(s);
+            Console.WriteLine();
+        }
+        #endregion
     }
 
 }

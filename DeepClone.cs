@@ -29,7 +29,7 @@ namespace DeepClone
                 return null;
 
             var inputType = input.GetType();
-            Console.WriteLine($"DeepClone.Clone() = input={input}, Type={inputType}");
+            //Console.WriteLine($"DeepClone.Clone() = input={input}, Type={inputType}");
 
             // if value type, return 
             if (inputType.IsValueType)

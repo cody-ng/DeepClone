@@ -26,14 +26,14 @@ namespace DeepClone.ReferenceType
         protected HashSet<LinkedListItem> ItemHash {get;set;} = new HashSet<LinkedListItem>();
         #endregion
 
-        protected void Clear()
+        public void Clear()
         {
             this.Item = null;
             this.Length = 0;
             this.ItemHash.Clear();
         }
 
-        protected void Init(LinkedListItem item)
+        public void Init(LinkedListItem item)
         {
             Clear();
 
@@ -57,6 +57,54 @@ namespace DeepClone.ReferenceType
             }
 
             this.Length = length;
+        }
+
+        /// <summary>
+        /// Returns the last item of the list.
+        /// </summary>
+        /// <returns></returns>
+        public LinkedListItem GetLastItem()
+        {
+            var temp = this.Item;
+
+            while (temp != null)
+            {
+                if (temp.Next == null)
+                    break;
+                temp = temp.Next;
+            }
+
+            return temp;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nthItem">Zero based index</param>
+        /// <returns></returns>
+        public LinkedListItem GetNthItem(int nthItem)
+        {
+            // the length check prevents the following:
+            // 1) non-existing item
+            // 2) looped back scenario
+            //    (because when the length is calculated in Init(), it already checks for loop backs)
+            if (nthItem > this.Length)
+                throw new ArgumentException("nItem must be less than the length of the list");
+
+            var temp = this.Item;
+
+            int count = 0;
+
+            while (temp != null)
+            {
+                if (count == nthItem - 1)
+                    return temp;
+                
+                ++count;
+                temp = temp.Next;
+            }
+
+            return temp;
         }
 
 
@@ -88,8 +136,9 @@ namespace DeepClone.ReferenceType
             // check whether both items' value are equal.
             var item1 = this.Item;
             var item2 = otherItem.Item;
+            int count = 0;
 
-            while( item1 != null)
+            while( item1 != null && count++ < this.Length)
             {
                 if (!item1.Equals(item2))
                     return false;
