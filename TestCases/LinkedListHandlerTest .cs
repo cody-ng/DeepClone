@@ -197,7 +197,7 @@ namespace DeepClone.TestCases
             Clone_LoopBack_List_Test(500, 500);
 
             // 5) last item loops back to the 1th item (large list test)
-            Clone_LoopBack_List_Test(10000, 1);
+            Clone_LoopBack_List_Test(1000000, 1);
 
         }
 

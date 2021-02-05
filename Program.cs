@@ -29,11 +29,11 @@ namespace DeepClone
 
             //LinkedListItemTest.Equal_Value_Tests();
 
-            //LinkedListHandlerTest.IsUnique_Test();
-            //LinkedListHandlerTest.Equal_Test();
-            //LinkedListHandlerTest.Length_Test();
-            //LinkedListHandlerTest.GetLastItem_Test();
-            //LinkedListHandlerTest.GetNthItem_Test();
+            LinkedListHandlerTest.IsUnique_Test();
+            LinkedListHandlerTest.Equal_Test();
+            LinkedListHandlerTest.Length_Test();
+            LinkedListHandlerTest.GetLastItem_Test();
+            LinkedListHandlerTest.GetNthItem_Test();
 
             LinkedListHandlerTest.Clone_LoopBack_List_Tests();
 
