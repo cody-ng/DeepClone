@@ -31,8 +31,8 @@ namespace DeepClone
             var inputType = input.GetType();
             //Console.WriteLine($"DeepClone.Clone() = input={input}, Type={inputType}");
 
-            // if value type, return 
-            if (inputType.IsValueType)
+            // if primitve value type, return 
+            if (inputType.IsValueType && inputType.IsPrimitive)
             {
                 return CloneValueType(input, inputType);
             }

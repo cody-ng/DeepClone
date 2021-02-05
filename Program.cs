@@ -29,11 +29,11 @@ namespace DeepClone
 
             //LinkedListItemTest.Equal_Value_Tests();
 
-            LinkedListHandlerTest.IsUnique_Test();
-            LinkedListHandlerTest.Equal_Test();
-            LinkedListHandlerTest.Length_Test();
-            LinkedListHandlerTest.GetLastItem_Test();
-            LinkedListHandlerTest.GetNthItem_Test();
+            //LinkedListHandlerTest.IsUnique_Test();
+            //LinkedListHandlerTest.Equal_Test();
+            //LinkedListHandlerTest.Length_Test();
+            //LinkedListHandlerTest.GetLastItem_Test();
+            //LinkedListHandlerTest.GetNthItem_Test();
 
             LinkedListHandlerTest.Clone_LoopBack_List_Tests();
 
@@ -44,7 +44,7 @@ namespace DeepClone
             var result = DeepClone.Clone(input);
             Console.WriteLine($"result = {result}");
 
-            Console.WriteLine($"is clone referenceEqual() to input? = {object.ReferenceEquals(input, result)}");
+            Console.WriteLine($"is clone NOT referenceEqual() to input? = {!object.ReferenceEquals(input, result)}");
             Console.WriteLine();
         }
 
@@ -54,11 +54,9 @@ namespace DeepClone
             var result = (LinkedListItem)DeepClone.Clone(input);
             Console.WriteLine($"result = {result}");
 
-            Console.WriteLine($"is clone referenceEqual() to input? = {object.ReferenceEquals(input, result)}");
+            Console.WriteLine($"is clone NOT referenceEqual() to input? = {!object.ReferenceEquals(input, result)}");
+            Console.WriteLine();
 
-            //var isUnique = LinkedListHandlerTest.IsUnique(input, result);
-            //Console.WriteLine($"isUnique = {isUnique}");
-            //Console.WriteLine();
         }
 
 #if false

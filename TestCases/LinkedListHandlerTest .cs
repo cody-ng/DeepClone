@@ -68,10 +68,10 @@ namespace DeepClone.TestCases
             var l3 = Helper.CreateItemHandlers(1000);
             var l4 = Helper.CreateItemHandlers(50);
 
-            Console.WriteLine($"l1 and l1 are unique? = {l1.IsUnique(l1)}");
-            Console.WriteLine($"l2 and l2 are unique? = {l2.IsUnique(l2)}");
-            Console.WriteLine($"l3 and l3 are unique? = {l3.IsUnique(l3)}");
-            Console.WriteLine($"l4 and l4 are unique? = {l4.IsUnique(l4)}");
+            Console.WriteLine($"l1 and l1 are NOT unique? = {!l1.IsUnique(l1)}");
+            Console.WriteLine($"l2 and l2 are NOT unique? = {!l2.IsUnique(l2)}");
+            Console.WriteLine($"l3 and l3 are NOT unique? = {!l3.IsUnique(l3)}");
+            Console.WriteLine($"l4 and l4 are NOT unique? = {!l4.IsUnique(l4)}");
             Console.WriteLine();
 
             Console.WriteLine($"l1 and l2 are unique? = {l1.IsUnique(l2)}");
@@ -98,17 +98,18 @@ namespace DeepClone.TestCases
             var l4 = Helper.CreateItemHandlers(500);
             var l5 = Helper.CreateItemHandlers(500);
 
-            Console.WriteLine("Not equal cases...");
-            Console.WriteLine($"l1 and l2 are equal? = {l1.AreEqual(l2)}");
-            Console.WriteLine($"l2 and l3 are equal? = {l2.AreEqual(l3)}");
-            Console.WriteLine($"l3 and l4 are equal? = {l3.AreEqual(l4)}");
-            Console.WriteLine();
-
             Console.WriteLine("Equal cases...");
             Console.WriteLine($"l1 and l1 are equal? = {l1.AreEqual(l1)}");
             Console.WriteLine($"l2 and l2 are equal? = {l2.AreEqual(l2)}");
             Console.WriteLine($"l4 and l5 are equal? = {l4.AreEqual(l5)}");
             Console.WriteLine();
+
+            Console.WriteLine("Not equal cases...");
+            Console.WriteLine($"l1 and l2 are NOT equal? = {!l1.AreEqual(l2)}");
+            Console.WriteLine($"l2 and l3 are NOT equal? = {!l2.AreEqual(l3)}");
+            Console.WriteLine($"l3 and l4 are NOT equal? = {!l3.AreEqual(l4)}");
+            Console.WriteLine();
+
 
         }
 
@@ -194,6 +195,9 @@ namespace DeepClone.TestCases
 
             // 4) last item loops back to the last item
             Clone_LoopBack_List_Test(500, 500);
+
+            // 5) last item loops back to the 1th item (large list test)
+            Clone_LoopBack_List_Test(10000, 1);
 
         }
 
